@@ -15,9 +15,7 @@
     "mocha": "^5.2.0"
   },
   "scripts": {
-    "test": "mocha",
-    "watch:test": "nodemon -e js -w src -x \"npm run build && npm run test\"",
-    "build": "babel src -d lib"
+    "test:watch": "babel src --out-dir lib --watch & mocha test --watch"
   },
   "author": "",
   "license": "ISC"
