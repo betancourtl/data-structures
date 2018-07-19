@@ -16,6 +16,16 @@ describe('Queue', () => {
     });
   });
 
+  it('should queue an array of items', () => {
+    const queue = new Queue();
+    queue.enqueue([1,2 ,3]);
+    expect(queue.items).to.deep.equal({
+      0: 1,
+      1: 2,
+      2: 3,
+    });
+  });
+
   it('should dequeue an item', () => {
     const queue = new Queue();
     queue.enqueue(1);

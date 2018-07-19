@@ -6,8 +6,10 @@ class Queue {
   }
 
   enqueue = (item) => {
-    this.items[this.count] = item;
-    this.count++;
+    [].concat(item).forEach((x) => {
+      this.items[this.count] = x;
+      this.count++;
+    });
   };
 
   dequeue = () => {
