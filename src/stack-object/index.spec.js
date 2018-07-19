@@ -82,4 +82,12 @@ describe('Stack data structure', () => {
     stack.push(3);
     expect(stack.peek()).to.equal(3);
   });
+
+  it('should print the stack', () => {
+    const stack = new Stack();
+    stack.push(1);
+    stack.push(2);
+    stack.push(3);
+    expect(stack.toString()).to.equal('1, 2, 3');
+  });
 });

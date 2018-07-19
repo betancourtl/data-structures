@@ -39,6 +39,15 @@ class Stack {
 
     return this.items[this.count - 1];
   };
+
+  toString = () => {
+    if (this.isEmpty()) return '';
+
+    return Object
+      .keys(this.items)
+      .map(x => this.items[x])
+      .join(', ')
+  };
 }
 
 export default Stack;
