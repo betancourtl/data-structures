@@ -1,12 +1,5 @@
-/**
- * Node is used with linked lists, to keep track of the nodes.
- */
-class Node {
-  constructor(element) {
-    this.next = null;
-    this.element = element;
-  }
-}
+import Node from '../Node';
+import { defaultEquals } from '../utils';
 
 /**
  * Linked list creates linked nodes.
@@ -15,7 +8,12 @@ class LinkedList {
   constructor() {
     this.count = 0;
     this.head = null;
+    this.equals = defaultEquals; // User can change this to be able to compare different data structures.
   }
+
+  _withinBoundary = index => {
+    return (index >= 0 && index < this.count) === false;
+  };
 
   push = el => {
     const node = new Node(el);
@@ -32,8 +30,8 @@ class LinkedList {
     this.count++;
   };
 
-  insert = (index, el) => {
-    if ((index >= 0 && index <= this.count) === false) return undefined;
+  insertAt = (index, el) => {
+    if (this._withinBoundary(index)) return undefined;
     const node = new Node(el);
     let prev = null;
     let current = this.head;
@@ -58,28 +56,62 @@ class LinkedList {
     this.count++;
   };
 
-  remove = el => {
+  removeAt = index => {
+    // check id the index is within boundary
+    if (this._withinBoundary(index)) return undefined;
+    // find the node and the prev node.
+    let current = this.head;
 
+    if (index === 0) {
+      this.head = current.next;
+      this.count--;
+      return;
+    }
+
+    let prev = null;
+    for (let i = 0; i < index; i++) {
+      prev = current;
+      current = current.next;
+    }
+    prev.next = current.next;
+    this.count--;
+    return current.element;
+  };
+
+  remove = el => {
+    const index = this.indexOf(el);
+    return this.removeAt(index);
   };
 
   indexOf = el => {
+    let current = this.head;
 
-  };
+    for (let i = 0; i < this.count && current !== null; i++) {
+      if (this.equals(current.element, el)) return i;
+      current = current.next;
+    }
 
-  removeAt = index => {
-
-  };
-
-  toString = () => {
-
+    return -1;
   };
 
   size = () => {
-
+    return this.count;
   };
 
   isEmpty = () => {
     return this.head === null;
+  };
+
+  toString = () => {
+    if (this.isEmpty()) return '';
+    let current = this.head;
+    let acc = [];
+    for (let i = 0; i < this.count; i++) {
+      acc.push(current.element);
+      current = current.next;
+    }
+
+    return acc.join(', ');
   };
 }
 
