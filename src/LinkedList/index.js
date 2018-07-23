@@ -12,14 +12,24 @@ class LinkedList {
   }
 
   _withinBoundary = index => {
-    return (index >= 0 && index < this.count) === false;
+    return (index >= 0 && index < this.count) === true;
+  };
+
+  getElementAt = index => {
+    if (!this._withinBoundary(index)) return undefined;
+    let current = this.head;
+    for (let i = 0; i < index; i++) {
+      current = current.next;
+    }
+    return current;
   };
 
   push = el => {
     const node = new Node(el);
     if (this.head === null) {
       this.head = node;
-    } else {
+    }
+    else {
       let current = this.head;
       while (current.next !== null) {
         current = current.next;
@@ -31,7 +41,7 @@ class LinkedList {
   };
 
   insertAt = (index, el) => {
-    if (this._withinBoundary(index)) return undefined;
+    if (!this._withinBoundary(index)) return undefined;
     const node = new Node(el);
     let prev = null;
     let current = this.head;
@@ -58,7 +68,7 @@ class LinkedList {
 
   removeAt = index => {
     // check id the index is within boundary
-    if (this._withinBoundary(index)) return undefined;
+    if (!this._withinBoundary(index)) return undefined;
     // find the node and the prev node.
     let current = this.head;
 

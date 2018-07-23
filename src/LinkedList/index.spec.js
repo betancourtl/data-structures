@@ -1,6 +1,6 @@
 import LinkedList from './';
 
-describe.only('LinkedList', () => {
+describe('LinkedList', () => {
   it('should push to a linked list', () => {
     const list = new LinkedList();
     list.push(1);
@@ -181,5 +181,16 @@ describe.only('LinkedList', () => {
     list.push(2);
     list.push(3);
     expect(list.toString()).to.deep.equal('1, 2, 3');
+  });
+  it('should return the element at index', () => {
+    const list = new LinkedList();
+    list.push(1);
+    list.push(2);
+    list.push(3);
+    expect(list.getElementAt(-1)).to.equal(undefined);
+    expect(list.getElementAt(0).element).to.equal(1);
+    expect(list.getElementAt(1).element).to.equal(2);
+    expect(list.getElementAt(2).element).to.equal(3);
+    expect(list.getElementAt(3)).to.equal(undefined);
   });
 });

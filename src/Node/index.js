@@ -2,9 +2,9 @@
  * Node is used with linked lists, to keep track of the nodes.
  */
 class Node {
-  constructor(element) {
-    this.next = null;
+  constructor(element, next = null) {
     this.element = element;
+    this.next = next;
   }
 }
 
