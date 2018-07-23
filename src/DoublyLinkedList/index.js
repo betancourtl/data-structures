@@ -62,10 +62,12 @@ class DoublyLinkedList extends LinkedList {
     let current = this.head;
 
     if (index === 0) {
-      this.head = current.next;
       // prev | current | next
-      if (current.next && current.next.prev) current.next.prev = null;
-      else this.tail = null;
+      //        ^ to be deleted
+      this.head = current.next;
+      current.next && current.next.prev
+        ? current.next.prev = null
+        : this.tail = null;
       this.count--;
       return;
     }
@@ -77,10 +79,11 @@ class DoublyLinkedList extends LinkedList {
       prev = current;
       current = current.next;
     }
-    prev.next = current.next;
 
-    if (prev.next && prev.next.prev) prev.next.prev = prev;
-    else this.tail = prev;
+    prev.next = current.next;
+    prev.next && prev.next.prev
+      ? prev.next.prev = prev
+      : this.tail = prev;
 
     this.count--;
     return current.element;
