@@ -14,47 +14,38 @@ class DoublyLinkedList extends LinkedList {
   insertAt = (index, el) => {
     if (!this._withinInsertBoundary(index)) return undefined;
     const node = new DoublyNode(el);
-    let prev = null;
     let current = this.head;
 
-    // Insert at the tail
-    if (this.count === index) {
-      const node = new DoublyNode(el);
+    // When inserting in the head
+    if (index === 0) {
       if (this.head === null) {
         this.head = node;
         this.tail = node;
       } else {
-        this.tail.next = node;
-        node.prev = this.tail;
+        node.next = this.head;
+        current.prev = node;
+        this.head = node;
       }
     }
 
-    // prev -> node -> current
-    else if (index === 0) {
-      this.head = node;
-      if (this.head === null) this.tail = node;
-      node.next = current;
-      node.prev = null;
-      current.prev = node;
+    // when inserting in the tail
+    else if (index === this.count) {
+      current = this.tail;
+      current.next = node;
+      node.prev = current;
+      this.tail = node;
     }
 
-    // element is not at head
     else {
-      let i = 0;
-      while (i < index) {
-        prev = current;
-        current = current.next;
-        i++;
-      }
-
-      // prev -> node -> current
-      prev.next = node;
-      node.prev = prev;
+      // when inserting anywhere else
+      const previous = this.getElementAt(index - 1);
+      current = previous.next;
       node.next = current;
+      previous.next = node;
       current.prev = node;
+      node.prev = previous;
     }
     this.count++;
-    this.tail = this.getElementAt(this.count - 1);
   };
 
   removeAt = (index) => {
