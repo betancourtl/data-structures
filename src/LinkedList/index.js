@@ -15,6 +15,10 @@ class LinkedList {
     return (index >= 0 && index < this.count) === true;
   };
 
+  _withinInsertBoundary = index => {
+    return (index >= 0 && index <= this.count) === true;
+  };
+
   getElementAt = index => {
     if (!this._withinBoundary(index)) return undefined;
     let current = this.head;
@@ -25,15 +29,12 @@ class LinkedList {
   };
 
   push = el => {
-    const node = new Node(el);
-    if (this.head === null) this.head = node;
-    else this.getElementAt(this.count - 1).next = node;
-    this.count++;
+    this.insertAt(this.count,  el);
     return this;
   };
 
   insertAt = (index, el) => {
-    if (!this._withinBoundary(index)) return undefined;
+    if (!this._withinInsertBoundary(index)) return undefined;
     const node = new Node(el);
     let prev = null;
     let current = this.head;

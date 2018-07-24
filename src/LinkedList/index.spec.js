@@ -94,7 +94,10 @@ describe('LinkedList', () => {
         element: 2,
         next: {
           element: 3,
-          next: null,
+          next: {
+            element: 4,
+            next: null,
+          },
         },
       },
     });

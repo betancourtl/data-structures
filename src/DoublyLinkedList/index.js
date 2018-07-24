@@ -8,34 +8,34 @@ class DoublyLinkedList extends LinkedList {
   }
 
   push = el => {
-    const node = new DoublyNode(el);
-    if (this.head === null) {
-      this.head = node;
-      this.tail = node;
-    } else {
-      let current = this.head;
-      while (current.next !== null) {
-        current = current.next;
-      }
-      current.next = node;
-      node.prev = current;
-    }
-    this.count++;
-    this.tail = node;
+    this.insertAt(this.count, el);
   };
 
   insertAt = (index, el) => {
-    if (!this._withinBoundary(index)) return undefined;
+    if (!this._withinInsertBoundary(index)) return undefined;
     const node = new DoublyNode(el);
     let prev = null;
     let current = this.head;
 
+    // Insert at the tail
+    if (this.count === index) {
+      const node = new DoublyNode(el);
+      if (this.head === null) {
+        this.head = node;
+        this.tail = node;
+      } else {
+        this.tail.next = node;
+        node.prev = this.tail;
+      }
+    }
+
     // prev -> node -> current
-    if (index === 0) {
+    else if (index === 0) {
+      this.head = node;
+      if (this.head === null) this.tail = node;
       node.next = current;
       node.prev = null;
       current.prev = node;
-      this.head = node;
     }
 
     // element is not at head
@@ -61,6 +61,7 @@ class DoublyLinkedList extends LinkedList {
     if (!this._withinBoundary(index)) return undefined;
     let current = this.head;
 
+    // The item is the head
     if (index === 0) {
       // prev | current | next
       //        ^ to be deleted
@@ -72,12 +73,19 @@ class DoublyLinkedList extends LinkedList {
       return;
     }
 
+    // If the item is the tail
     let prev = null;
-    for (let i = 0; i < index; i++) {
-      // prev | current | next
-      //        ^ to be deleted
-      prev = current;
-      current = current.next;
+
+    // We use the tail reference to avoid searching for the element
+    // This results in an 0(1) operation
+    if (this.count - 1 === index) {
+      prev = this.tail.prev;
+      current = this.tail;
+    } else {
+      // We use the search for the index
+      // This results in an 0(n) operation
+      current = this.getElementAt(index);
+      prev = current.prev;
     }
 
     prev.next = current.next;
