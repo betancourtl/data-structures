@@ -26,18 +26,10 @@ class LinkedList {
 
   push = el => {
     const node = new Node(el);
-    if (this.head === null) {
-      this.head = node;
-    }
-    else {
-      let current = this.head;
-      while (current.next !== null) {
-        current = current.next;
-      }
-      current.next = node;
-    }
-
+    if (this.head === null) this.head = node;
+    else this.getElementAt(this.count - 1).next = node;
     this.count++;
+    return this;
   };
 
   insertAt = (index, el) => {

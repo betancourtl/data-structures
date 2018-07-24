@@ -104,6 +104,12 @@ describe('LinkedList', () => {
     list.removeAt(0);
     expect(list.head).to.deep.equal(null);
   });
+  it('should try to remove the only linked list', () => {
+    const list = new LinkedList();
+    list.push(1);
+    list.removeAt(0);
+    expect(list.head).to.deep.equal(null);
+  });
   it('should remove the head node', () => {
     const list = new LinkedList();
     list.push(1);

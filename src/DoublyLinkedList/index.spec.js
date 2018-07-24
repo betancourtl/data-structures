@@ -1,6 +1,6 @@
 import DoublyLinkedList from './';
 
-describe.only('DoublyLinkedList', () => {
+describe('DoublyLinkedList', () => {
   it('should push 1 item to a linked list', () => {
     const list = new DoublyLinkedList();
     list.push(1);
