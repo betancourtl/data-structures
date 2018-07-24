@@ -44,7 +44,6 @@ class Set {
     return Object.prototype.hasOwnProperty.call(this.items, el);
   };
 
-
   // Should return the items in SetA and Set B
   union = setB => {
     return new Set([...this.values, ...setB.values]);
