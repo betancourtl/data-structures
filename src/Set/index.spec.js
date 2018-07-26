@@ -1,6 +1,6 @@
 import Set from './';
 
-describe.only('should ', () => {
+describe('should ', () => {
   it('should create a set', () => {
     const set = new Set();
     set

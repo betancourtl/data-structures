@@ -61,8 +61,9 @@ class Set {
 
   // Check if all values in SubsetA are available in SubsetB
   isSubsetOf = setB => {
-    if (this.size > setB.size) return false;
-    return this.values.every(x => setB.has(x) === true);
+    return this.size > setB.size
+      ? false
+      : this.values.every(x => setB.has(x) === true);
   }
 }
 
