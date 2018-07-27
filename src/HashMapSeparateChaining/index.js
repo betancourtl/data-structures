@@ -1,5 +1,8 @@
 import { toStrFn } from '../utils';
 import ValuePair from '../ValuePair';
+import LinkedList from "../LinkedList";
+
+const equalsValuePair = (a, key) => a.key === key;
 
 /**
  * This class stores key, value pairs in a map by using a hash a sa key
@@ -16,27 +19,46 @@ class HashMapSeparateChaining {
 
   put = (key, value) => {
     // If the key is not null and the value is not null
-    // check if the keys exists.
-    // if it does not exist, create a linked list and add the item
-    // If it does exist, add the item to the
     if (key === null || value === null) return this;
+    // hash the key
     const hash = this.hashCode(key);
-    this.table[hash] = new ValuePair(key, value);
+    // check if the keys exists.
+    const list = this.table[hash];
+    // if it does not exist, create a linked list and add the item
+    if (!list) {
+      this.table[hash] = new LinkedList();
+      this.table[hash].equals = equalsValuePair;
+      this.table[hash].push(new ValuePair(key, value));
+    } else {
+      list.push(new ValuePair(key, value));
+    }
+
     return this;
   };
 
   remove = key => {
+    // get the hash
     const hash = this.hashCode(key);
-    const vp = this.table[hash];
-    if (vp === null) return this;
-    delete this.table[hash];
+    // find the list
+    const list = this.table[hash];
+    // if no list return this
+    if (!list) return this;
+    // if there is a list remove the item.
+    list.remove(key);
+    if (list.size() === 0) delete this.table[hash];
     return this;
   };
 
   // We only return the value from the ValuePair
   get = key => {
-    const kv = this.table[this.hashCode(key)];
-    return kv === null ? undefined : kv.value;
+    // get the hash
+    const hash = this.hashCode(key);
+    // find this list
+    const list = this.table[hash];
+    if (!list) return undefined;
+    if (list.isEmpty()) return undefined;
+    const el = list.getElementAt(list.indexOf(key));
+    if (el) return el.element;
   };
 
   loseLoseHashCode = key => {

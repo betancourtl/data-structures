@@ -1,11 +1,11 @@
 import HashMapSeparateChaining from './';
 
 describe.only('HashMapSeparateChaining', () => {
-  it('should create a HashMapSeparateChaining', () => {
+  xit('should create a HashMapSeparateChaining', () => {
     expect(new HashMapSeparateChaining() instanceof HashMapSeparateChaining);
   });
 
-  it('should hash a char', () => {
+  xit('should hash a char', () => {
     const hashMap = new HashMapSeparateChaining();
     const hash = hashMap.loseLoseHashCode('dog');
     expect(hash).to.equal(314 % 37)
@@ -13,31 +13,34 @@ describe.only('HashMapSeparateChaining', () => {
 
   it('should put a value into the map', () => {
     const hashMap = new HashMapSeparateChaining();
-    const value = { name: 'Fluffy', breed: 'Shi Tzu' };
-    hashMap.put('dog', value);
-    expect(hashMap.get('dog')).to.deep.equal(value);
-  });
-
-  xit('should remove a value from the map', () => {
-    const hashMap = new HashMap();
-    const value = { name: 'Fluffy', breed: 'Shi Tzu' };
-    hashMap.put('dog', value);
-    hashMap.remove('dog');
-    expect(hashMap.table).to.deep.equal({})
-  });
-
-  xit('should get a value from the map', () => {
-    const hashMap = new HashMap();
     const dog = { name: 'Fluffy', breed: 'Shi Tzu' };
-    const cat = { name: 'KitKat', breed: 'Choco flow' };
-    hashMap.put('dog', dog);
-    hashMap.put('cat', cat);
-    expect(hashMap.get('dog')).to.equal(dog);
-    expect(hashMap.get('cat')).to.equal(cat);
+    const cat = { name: 'Wizzy', breed: 'Fuzzy' };
+    hashMap.put('Jonathan', dog);
+    hashMap.put('Jamie', cat);
+    expect(hashMap.table[5].head.element.key).to.equal('Jonathan');
+    expect(hashMap.table[5].head.next.element.key).to.equal('Jamie');
   });
 
-  xit('should return true if it is empty and false if not', () => {
-    const hashMap = new HashMap();
+  it('should get a value from the map', () => {
+    const hashMap = new HashMapSeparateChaining();
+    const person1 = { name: 'Fluffy', breed: 'Shi Tzu' };
+    const person2 = { name: 'Wizzy', breed: 'Fuzzy' };
+    hashMap.put('Jonathan', person1);
+    hashMap.put('Jamie', person2);
+    const jonathan = hashMap.get('Jonathan');
+    expect(jonathan.key).to.equal('Jonathan');
+  });
+
+  it('should remove a value from the map', () => {
+    const hashMap = new HashMapSeparateChaining();
+    const person1 = { name: 'Fluffy', breed: 'Shi Tzu' };
+    hashMap.put('Jonathan', person1);
+    hashMap.remove('Jonathan');
+    expect(hashMap.table).to.deep.equal({});
+  });
+
+  it('should return true if it is empty and false if not', () => {
+    const hashMap = new HashMapSeparateChaining();
     expect(hashMap.isEmpty).to.equal(true);
     const dog = { name: 'Fluffy', breed: 'Shi Tzu' };
     const cat = { name: 'KitKat', breed: 'Choco flow' };
@@ -46,12 +49,12 @@ describe.only('HashMapSeparateChaining', () => {
     expect(hashMap.isEmpty).to.equal(false);
   });
 
-  xit('should return the table as a string', () => {
-    const hashMap = new HashMap();
-    expect(hashMap.isEmpty).to.equal(true);
+  it('should return the table as a string', () => {
+    const hashMap = new HashMapSeparateChaining();
     const dog = { name: 'Fluffy', breed: 'Shi Tzu' };
     const cat = { name: 'KitKat', breed: 'Choco flow' };
     hashMap.put('dog', dog);
     hashMap.put('cat', cat);
+    console.log(hashMap.toString());
   });
 });
