@@ -1,6 +1,6 @@
 import Map from './';
 
-describe.only('Map', () => {
+describe('Map', () => {
   it('should create a Map', () => {
     const map = new Map();
     expect(map instanceof Map).to.equal(true);
@@ -16,7 +16,7 @@ describe.only('Map', () => {
   it('should set to a map', () => {
     const map = new Map();
     map.set(1, 'Luis');
-    expect(map.items['1']).to.equal('Luis');
+    expect(map.table['1']).to.equal('Luis');
     expect(map.size).to.equal(1);
   });
 
@@ -24,7 +24,7 @@ describe.only('Map', () => {
     const map = new Map();
     map.set(1, 'Luis');
     map.set(1, 'Tae');
-    expect(map.items[1]).to.equal('Tae');
+    expect(map.table[1]).to.equal('Tae');
   });
 
   it('should get a value from the map', () => {
@@ -43,7 +43,6 @@ describe.only('Map', () => {
   it('should get a value from the map', () => {
     const map = new Map();
     map.set(1, null);
-    console.log(map.items);
     expect(map.get(1)).to.equal(undefined);
   });
 
@@ -72,7 +71,7 @@ describe.only('Map', () => {
     map.set(2, 'Cristian');
     map.set(3, 'Tae');
     map.clear();
-    expect(map.items).to.deep.equal({});
+    expect(map.table).to.deep.equal({});
     expect(map.size).to.equal(0);
   });
 
