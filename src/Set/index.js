@@ -67,9 +67,7 @@ class Set {
   };
 
   toString() {
-    if (this.isEmpty) {
-      return '';
-    }
+    if (this.isEmpty) return '';
     const values = this.values;
     let objString = `${values[0]}`;
     for (let i = 1; i < values.length; i++) {

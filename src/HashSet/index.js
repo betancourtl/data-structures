@@ -10,15 +10,15 @@ class HashSet {
     return Object.keys(this.table).length === 0;
   }
 
-  put = (value) => {
-    if (value === null) return this;
-    const hash = this.hashCode(value);
+  put = val => {
+    if (val === null) return this;
+    const hash = this.hashCode(val);
     const set = this.table[hash];
     if (!set) {
       this.table[hash] = new Set();
-      this.table[hash].add(value)
+      this.table[hash].add(val)
     } else {
-      set.add(value);
+      set.add(val);
     }
     return this;
   };
@@ -32,17 +32,16 @@ class HashSet {
     return this;
   };
 
-  // We only return the value from the ValuePair
-  get = key => {
-    const set = this.table[this.hashCode(key)];
-    return set && set.has(key)
-      ? set.items[key]
+  get = val => {
+    const set = this.table[this.hashCode(val)];
+    return set && set.has(val)
+      ? set.items[val]
       : undefined;
   };
 
-  loseLoseHashCode = key => {
-    if (typeof key === 'number') return key;
-    const tableKey = toStrFn(key);
+  loseLoseHashCode = val => {
+    if (typeof val === 'number') return val;
+    const tableKey = toStrFn(val);
 
     let hash = 0;
     for (let i = 0; i < tableKey.length; i++) hash += tableKey.charCodeAt(i);
@@ -50,7 +49,7 @@ class HashSet {
     return hash % 37;
   };
 
-  hashCode = key => this.loseLoseHashCode(key);
+  hashCode = val => this.loseLoseHashCode(val);
 
   toString = () => {
     if (this.isEmpty) return '';

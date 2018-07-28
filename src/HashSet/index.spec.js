@@ -1,6 +1,6 @@
 import HashSet from './';
 
-describe.only('HashSet', () => {
+describe('HashSet', () => {
   it('should create a HashMap', () => {
     expect(new HashSet() instanceof HashSet);
   });
@@ -54,14 +54,6 @@ describe.only('HashSet', () => {
     hashSet.put('Jonathan');
     hashSet.put('Jaime');
     hashSet.put('Raul');
-    console.log(hashSet.toString());
-  });
-
-  it.only('should test set', () => {
-    const set = new Set();
-    set.add({ name: 'Luis' });
-    console.log(set.values());
-    const item = set.has("{ name: 'Luis' }");
-    console.log(item);
+    expect(typeof hashSet.toString()).to.equal('string');
   });
 });
