@@ -1,11 +1,11 @@
 import HashMapSeparateChaining from './';
 
-describe.only('HashMapSeparateChaining', () => {
-  xit('should create a HashMapSeparateChaining', () => {
+describe('HashMapSeparateChaining', () => {
+  it('should create a HashMapSeparateChaining', () => {
     expect(new HashMapSeparateChaining() instanceof HashMapSeparateChaining);
   });
 
-  xit('should hash a char', () => {
+  it('should hash a char', () => {
     const hashMap = new HashMapSeparateChaining();
     const hash = hashMap.loseLoseHashCode('dog');
     expect(hash).to.equal(314 % 37)
@@ -55,6 +55,6 @@ describe.only('HashMapSeparateChaining', () => {
     const cat = { name: 'KitKat', breed: 'Choco flow' };
     hashMap.put('dog', dog);
     hashMap.put('cat', cat);
-    console.log(hashMap.toString());
+    expect(typeof hashMap.toString()).to.equal('string');
   });
 });
