@@ -1,6 +1,5 @@
 import Set from './Set';
 import Map from './Map';
-import Tree from './Tree';
 import Queue from './Queue';
 import Deque from './Dequeue';
 import HashMap from './HashMap';
@@ -9,14 +8,15 @@ import LinkedList from './LinkedList';
 import Stack from './stack-object';
 import DoublyNode from './DoublyNode';
 import CircularList from './CircularList';
-import DoublyLinkedList from './DoublyLinkedList';
 import StackLinkedList from './StackLinkedList';
+import BinarySearchTree from './BinarySearchTree';
+import DoublyLinkedList from './DoublyLinkedList';
 import HashMapSeparateChaining from './HashMapSeparateChaining';
 
 export {
   Map,
   Set,
-  Tree,
+  BinarySearchTree,
   Deque,
   Stack,
   Queue,
