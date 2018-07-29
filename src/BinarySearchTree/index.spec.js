@@ -1,6 +1,6 @@
 import BinarySearchTree from './';
 
-describe.only('BinarySearchTree', () => {
+describe('BinarySearchTree', () => {
   it('should create a Tree', () => {
     const tree = new BinarySearchTree();
     expect(tree instanceof BinarySearchTree).to.equal(true);
@@ -77,7 +77,13 @@ describe.only('BinarySearchTree', () => {
       .insert(8);
 
     const min = tree.min();
-    expect(min.key).to.equal(1);
+    expect(min).to.equal(1);
+  });
+
+  it('min is null', () => {
+    const tree = new BinarySearchTree();
+    const min = tree.min();
+    expect(min).to.equal(null);
   });
 
   it('max', () => {
@@ -89,9 +95,16 @@ describe.only('BinarySearchTree', () => {
       .insert(1)
       .insert(8);
 
-    const min = tree.max();
-    expect(min.key).to.equal(8);
+    const max = tree.max();
+    expect(max).to.equal(8);
   });
+
+  it('max is null', () => {
+    const tree = new BinarySearchTree();
+    const max = tree.max();
+    expect(max).to.equal(null);
+  });
+
 
   it('search node', () => {
     const tree = new BinarySearchTree();

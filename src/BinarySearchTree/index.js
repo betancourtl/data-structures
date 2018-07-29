@@ -71,22 +71,24 @@ class BinarySearchTree {
   };
 
   min = () => {
-    return this.minNode(this.root);
+    const node = this.findMinNode(this.root);
+    return node !== null ? node.key : null
   };
 
-  minNode = (node) => {
+  findMinNode = (node) => {
     if (node === null) return node;
-    else if (node.left !== null) return this.minNode(node.left);
+    else if (node.left !== null) return this.findMinNode(node.left);
     else return node;
   };
 
   max = () => {
-    return this.maxNode(this.root);
+    const node = this.findMaxNode(this.root);
+    return node !== null ? node.key : null
   };
 
-  maxNode = (node) => {
+  findMaxNode = (node) => {
     if (node === null) return node;
-    else if (node.right !== null) return this.maxNode(node.right);
+    else if (node.right !== null) return this.findMaxNode(node.right);
     else return node;
   };
 
@@ -95,13 +97,9 @@ class BinarySearchTree {
   };
 
   searchNode = (node, key) => {
-    // node is null
     if (node === null) return false;
-    // key is less than left
     if (key < node.key) return this.searchNode(node.left, key);
-    // key is greater than right
     else if (key > node.key) return this.searchNode(node.right, key);
-    // We found the node
     else return true;
   };
 
@@ -156,7 +154,7 @@ class BinarySearchTree {
       // we find the minimum node in this tree.
       // we then set the node.key value that we are removing to the minimum node key.
       // we remove the minimum node.key from the tree.
-      // this is very clever.
+      // this is a very clever implementation (I found this on a packt javascript data structures book).
       const aux = this.minNode(node.right);
       node.key = aux.key;
       node.right = this.removeNode(node.right, aux.key);
