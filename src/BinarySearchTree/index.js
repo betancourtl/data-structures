@@ -77,7 +77,7 @@ class BinarySearchTree {
   minNode = (node) => {
     if (node === null) return node;
     else if (node.left !== null) return this.minNode(node.left);
-    else return node.key;
+    else return node;
   };
 
   max = () => {
@@ -87,7 +87,7 @@ class BinarySearchTree {
   maxNode = (node) => {
     if (node === null) return node;
     else if (node.right !== null) return this.maxNode(node.right);
-    else return node.key;
+    else return node;
   };
 
   search = key => {
@@ -105,7 +105,63 @@ class BinarySearchTree {
     else return true;
   };
 
-  remove = e => {
+  remove = key => {
+    return this.removeNode(this.root, key);
+  };
+
+  _isLeafNode = node => {
+    return node.left === null && node.right === null
+  };
+
+  removeNode = (node, key) => {
+    if (node === null) return null;
+    const nodeKey = node.key;
+
+    if (key < nodeKey) {
+      // we want to replace the left node here with the new node or null
+      node.left = this.removeNode(node.left, key);
+      return node;
+    }
+
+    else if (key > nodeKey) {
+      // we want to replace the left node here with the new node or null
+      node.right = this.removeNode(node.right, key);
+      return node;
+    }
+
+    // node has been found at this point
+    else {
+      // case 1
+      if (this._isLeafNode(node)) {
+        // set the node to null and return it back so it can replace
+        // the left or right parent node values
+        node = null;
+        return node;
+      }
+      //case 2
+      if (node.left === null) {
+        // we can do this because we know that one of the leaf nodes is null
+        node = node.right;
+        return node;
+      }
+      //case 3
+      else if (node.right === null) {
+        // we can do this because we know that one of the leaf nodes is null
+        node = node.left;
+        return node;
+      }
+
+      // case 3
+      // left and right nodes exist.
+      // we find the minimum node in this tree.
+      // we then set the node.key value that we are removing to the minimum node key.
+      // we remove the minimum node.key from the tree.
+      // this is very clever.
+      const aux = this.minNode(node.right);
+      node.key = aux.key;
+      node.right = this.removeNode(node.right, aux.key);
+      return node;
+    }
   };
 }
 
