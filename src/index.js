@@ -4,6 +4,7 @@ import Queue from './Queue';
 import Deque from './Dequeue';
 import HashMap from './HashMap';
 import HashSet from './HashSet';
+import AVLTree from './AVLTree';
 import Stack from './stack-object';
 import LinkedList from './LinkedList';
 import DoublyNode from './DoublyNode';
@@ -20,11 +21,13 @@ export {
   Deque,
   Stack,
   Queue,
+  AVLTree,
   HashMap,
   HashSet,
   DoublyNode,
   LinkedList,
   CircularList,
+  RedBlackTree,
   StackLinkedList,
   DoublyLinkedList,
   BinarySearchTree,
