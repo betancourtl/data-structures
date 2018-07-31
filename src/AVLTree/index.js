@@ -33,7 +33,6 @@ class AVLTree extends BinarySearchTree {
     }
   };
 
-
   // single rotation to the right
   rotationLL = (root) => {
     // root
@@ -43,8 +42,8 @@ class AVLTree extends BinarySearchTree {
     //     /
     //    6
 
-    const newRoot = root.left;
-    // newroot
+    const temp = root.left;
+    // temp
     //         12
     //        /  \
     //      6
@@ -55,13 +54,13 @@ class AVLTree extends BinarySearchTree {
     //        /  \
     //      null
 
-    newRoot.right = root;
-    // newroot
+    temp.right = root;
+    // temp
     //         12
     //        /  \
     //      6     18
 
-    return newRoot;
+    return temp;
   };
 
   // single rotation to the left
@@ -90,6 +89,17 @@ class AVLTree extends BinarySearchTree {
     return temp;
   };
 
+  // Double rotation first to the right and then to the left
+  rotationLR = (root) => {
+    root.left = this.rotationRR(root.left);
+    return this.rotationLL(root);
+  };
+
+  // Double rotation first to the left and then to the right
+  rotationRL = (root) => {
+    root.right = this.rotationLL(root.right);
+    return this.rotationRR(root);
+  };
 }
 
 export default AVLTree
