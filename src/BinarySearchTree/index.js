@@ -7,7 +7,8 @@ class BinarySearchTree {
     this.equalsFn = equalsFn;
   }
 
-  insert = key => {
+  // do not bind "this" with arrow fn so subclasses can call this with super.
+  insert(key) {
     this.root === null
       ? this.root = new TreeNode(key)
       : this.insertNode(this.root, key);
@@ -15,7 +16,7 @@ class BinarySearchTree {
     return this;
   };
 
-  insertNode = (root, key) => {
+  insertNode(root, key) {
     const right = root.right;
     const left = root.left;
 

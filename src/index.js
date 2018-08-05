@@ -5,10 +5,11 @@ import Deque from './Dequeue';
 import HashMap from './HashMap';
 import HashSet from './HashSet';
 import AVLTree from './AVLTree';
+import MinHeap from './MinHeap';
+import MaxHeap from './MaxHeap';
 import Stack from './stack-object';
 import LinkedList from './LinkedList';
 import DoublyNode from './DoublyNode';
-import RedBlackTree from './RedBlackTree';
 import CircularList from './CircularList';
 import StackLinkedList from './StackLinkedList';
 import BinarySearchTree from './BinarySearchTree';
@@ -24,10 +25,11 @@ export {
   AVLTree,
   HashMap,
   HashSet,
+  MinHeap,
+  MaxHeap,
   DoublyNode,
   LinkedList,
   CircularList,
-  RedBlackTree,
   StackLinkedList,
   DoublyLinkedList,
   BinarySearchTree,

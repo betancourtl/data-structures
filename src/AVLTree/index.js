@@ -1,3 +1,4 @@
+// TODO [] - finish this implementation later. It's a bit hard to figure this one out.
 import BinarySearchTree from '../BinarySearchTree';
 
 const factors = {
@@ -13,12 +14,16 @@ class AVLTree extends BinarySearchTree {
     super();
   }
 
-  getNodeHeight = (node) => {
+  parentInsert = key => {
+    return super.insert(key);
+  };
+
+  getNodeHeight = node => {
     if (node === null) return -1;
     return Math.max(this.getNodeHeight(node.left), this.getNodeHeight(node.right)) + 1;
   };
 
-  getBalanceFactor = (node) => {
+  getBalanceFactor = node => {
     switch (this.getNodeHeight(node.left) - this.getNodeHeight(node.right)) {
       case -2:
         return factors.UNBALANCED_RIGHT;
@@ -34,7 +39,7 @@ class AVLTree extends BinarySearchTree {
   };
 
   // single rotation to the right
-  rotationLL = (root) => {
+  rotationLL = root => {
     // root
     //         18
     //        /  \
@@ -64,7 +69,7 @@ class AVLTree extends BinarySearchTree {
   };
 
   // single rotation to the left
-  rotationRR = (root) => {
+  rotationRR = root => {
     // root
     //         18
     //         / \
@@ -90,15 +95,22 @@ class AVLTree extends BinarySearchTree {
   };
 
   // Double rotation first to the right and then to the left
-  rotationLR = (root) => {
+  rotationLR = root => {
     root.left = this.rotationRR(root.left);
     return this.rotationLL(root);
   };
 
   // Double rotation first to the left and then to the right
-  rotationRL = (root) => {
+  rotationRL = root => {
     root.right = this.rotationLL(root.right);
     return this.rotationRR(root);
+  };
+
+  insert(key) {
+    super.insert(key);
+    const balanceFactor = this.getBalanceFactor(this.root);
+    if (balanceFactor === factors.UNBALANCED_LEFT) {
+    }
   };
 }
 
