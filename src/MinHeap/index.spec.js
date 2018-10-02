@@ -1,6 +1,6 @@
 import MinHeap from './';
 
-describe('MinHeap', () => {
+describe.only('MinHeap', () => {
   it('should extract the minimum value of heap', () => {
     const heap = new MinHeap();
     heap

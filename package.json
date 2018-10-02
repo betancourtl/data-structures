@@ -16,7 +16,7 @@
     "mocha": "^5.2.0"
   },
   "scripts": {
-    "test:watch": "babel src --out-dir lib --watch & mocha test --watch",
+    "test:watch": "npm run build --watch & mocha test --watch",
     "build": "babel src --out-dir lib",
     "deploy:master": "git add . && git commit -m 'Deploy to Master' && git push"
   },
